@@ -1,5 +1,5 @@
 // ignore: unused_import
-import 'package:basic_code/module/home_screen.dart';
+import 'package:basic_code/module/home/home_screen.dart';
 import 'package:basic_code/module/lab_screen.dart';
 import 'package:basic_code/module/setting_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // List of pages to navigate
   final List<Widget> _pages = [
-    HomePage(),
+    HomeScreen(),
     SettingsScreen(),
     LaboratoryScreen(),
   ];
