@@ -19,13 +19,6 @@ class LectureDetailsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'Lecture: ${lectureDetail.title}',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
             Container(
               width: double.infinity,
               height: 200,
@@ -37,6 +30,13 @@ class LectureDetailsPage extends StatelessWidget {
                     child: Text('Image not found'),
                   );
                 },
+              ),
+            ),
+            Text(
+              'Lecture: ${lectureDetail.title}',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 16),
