@@ -1,5 +1,5 @@
 // Register Screen Widget
-import 'package:basic_code/module/myhomepage.dart';
+import 'package:basic_code/my_home_page.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatelessWidget {

@@ -1,13 +1,16 @@
+import 'package:basic_code/module/home/models/lecture_detail.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
+import 'lecture_details_page.dart';
+
+class HomeScreen extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   String _selectedOption = 'Information Communication Technology';
-  List<String> _lectureDetails = [];
+  List<LectureDetail> _lectureDetails = [];
 
   @override
   void initState() {
@@ -21,26 +24,77 @@ class _HomePageState extends State<HomePage> {
       switch (option) {
         case 'Information Communication Technology':
           _lectureDetails = [
-            'Introduction to ICT',
-            'Networking Basics',
-            'Software Development',
-            'Database Management',
+            LectureDetail(
+                title: 'Introduction to ICT',
+                time: '8.00am-10.00am',
+                location: 'SF02',
+                imageUrl:
+                    "https://cdn-blog.novoresume.com/articles/networking-statistics/bg.png"),
+            LectureDetail(
+                title: 'Networking Basics',
+                time: '10.00am-12.00pm',
+                location: 'SF03',
+                imageUrl:
+                    'https://media.licdn.com/dms/image/D5612AQFL8W1goz6qrQ/article-cover_image-shrink_720_1280/0/1679967164325?e=2147483647&v=beta&t=Naqebp4UD8aom_MsjcvSgKanFddmFuu0M1M0v0tPMJ8'),
+            LectureDetail(
+              title: 'Software Development',
+              time: '12.00pm-2.00pm',
+              location: 'SF04',
+              imageUrl:
+                  "https://cdn-blog.novoresume.com/articles/networking-statistics/bg.png",
+            ),
+            LectureDetail(
+              title: 'Database Management',
+              time: '2.00pm-4.00pm',
+              location: 'SF05',
+              imageUrl:
+                  "https://cdn-blog.novoresume.com/articles/networking-statistics/bg.png",
+            ),
           ];
           break;
         case 'Engineering Technology':
           _lectureDetails = [
-            'Mechanics',
-            'Thermodynamics',
-            'Material Science',
-            'Engineering Drawing',
+            LectureDetail(
+                title: 'Mechanics', time: '8.00am-10.00am', location: 'ET01'),
+            LectureDetail(
+              title: 'Thermodynamics',
+              time: '10.00am-12.00pm',
+              location: 'ET02',
+              imageUrl:
+                  "https://cdn-blog.novoresume.com/articles/networking-statistics/bg.png",
+            ),
+            LectureDetail(
+              title: 'Material Science',
+              time: '12.00pm-2.00pm',
+              location: 'ET03',
+              imageUrl:
+                  "https://cdn-blog.novoresume.com/articles/networking-statistics/bg.png",
+            ),
+            LectureDetail(
+              title: 'Engineering Drawing',
+              time: '2.00pm-4.00pm',
+              location: 'ET04',
+              imageUrl:
+                  "https://cdn-blog.novoresume.com/articles/networking-statistics/bg.png",
+            ),
           ];
           break;
         case 'Bio System Technology':
           _lectureDetails = [
-            'Plant Biotechnology',
-            'Environmental Engineering',
-            'Food Processing',
-            'Microbiology',
+            LectureDetail(
+                title: 'Plant Biotechnology',
+                time: '8.00am-10.00am',
+                location: 'BT01'),
+            LectureDetail(
+                title: 'Environmental Engineering',
+                time: '10.00am-12.00pm',
+                location: 'BT02'),
+            LectureDetail(
+                title: 'Food Processing',
+                time: '12.00pm-2.00pm',
+                location: 'BT03'),
+            LectureDetail(
+                title: 'Microbiology', time: '2.00pm-4.00pm', location: 'BT04'),
           ];
           break;
         default:
@@ -124,7 +178,8 @@ class _HomePageState extends State<HomePage> {
                       itemCount: _lectureDetails.length,
                       itemBuilder: (context, index) {
                         return SubjectCard(
-                            lectureDetails: _lectureDetails, index: index);
+                          lectureDetail: _lectureDetails[index],
+                        );
                       },
                     ),
                   ),
@@ -139,15 +194,12 @@ class _HomePageState extends State<HomePage> {
 }
 
 class SubjectCard extends StatelessWidget {
-  const SubjectCard({
-    super.key,
-    required int index,
-    required List<String> lectureDetails,
-  })  : _lectureDetails = lectureDetails,
-        _index = index;
+  final LectureDetail lectureDetail;
 
-  final List<String> _lectureDetails;
-  final int _index;
+  const SubjectCard({
+    Key? key,
+    required this.lectureDetail,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -161,21 +213,21 @@ class SubjectCard extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            _lectureDetails[_index],
+            lectureDetail.title,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
-            '8.00am-10.00am',
+            lectureDetail.time,
             style: TextStyle(
               fontSize: 14,
               color: Colors.grey[600],
             ),
           ),
           Text(
-            'SF02',
+            lectureDetail.location,
             style: TextStyle(
               fontSize: 14,
               color: Colors.grey[600],
@@ -183,7 +235,13 @@ class SubjectCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              // Add navigation or details action here
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      LectureDetailsPage(lectureDetail: lectureDetail),
+                ),
+              );
             },
             child: Text(
               'View Details',
@@ -201,54 +259,6 @@ class SubjectCard extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Information Communication Technology'),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Today Schedule',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 16),
-            ScheduleCard(
-              subject: 'Computer Organization And Architecture',
-              time: '8.00am-10.00am',
-              location: 'SF02',
-            ),
-            ScheduleCard(
-              subject: 'Communication Skills I',
-              time: '10.00am-12.00pm',
-              location: 'SF02',
-            ),
-            ScheduleCard(
-              subject: 'Mathematics I',
-              time: '1.00pm-3.00pm',
-              location: 'SF02',
-            ),
-            ScheduleCard(
-              subject: 'Mathematics I (Tutorial)',
-              time: '3.00pm-4.00pm',
-              location: 'SF02',
-            ),
-          ],
-        ),
       ),
     );
   }
