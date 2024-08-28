@@ -107,87 +107,89 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
-      appBar: AppBar(
-        forceMaterialTransparency: true,
-        automaticallyImplyLeading: false,
-        title: Text('Lecture Selection'),
-      ),
-      body: Column(
-        children: [
-          Container(
-            color: Colors.grey.shade300,
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: DropdownButton<String>(
-              value: _selectedOption,
-              icon: Icon(Icons.arrow_drop_down),
-              isExpanded: true,
-              underline: SizedBox(),
-              onChanged: (String? newValue) {
-                if (newValue != null) {
-                  _updateLectureContent(newValue);
-                }
-              },
-              items: <String>[
-                'Information Communication Technology',
-                'Engineering Technology',
-                'Bio System Technology'
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-          SizedBox(height: 20),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Today Schedule',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+      // appBar: AppBar(
+      //   forceMaterialTransparency: true,
+      //   automaticallyImplyLeading: false,
+      //   // title: Text('Lecture Selection'),
+      // ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              color: Colors.grey.shade300,
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: DropdownButton<String>(
+                value: _selectedOption,
+                icon: Icon(Icons.arrow_drop_down),
+                isExpanded: true,
+                underline: SizedBox(),
+                onChanged: (String? newValue) {
+                  if (newValue != null) {
+                    _updateLectureContent(newValue);
+                  }
+                },
+                items: <String>[
+                  'Information Communication Technology',
+                  'Engineering Technology',
+                  'Bio System Technology'
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(
+                      value,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
                       ),
-                      SizedBox(width: 8),
-                      Text(
-                        "Wed 12th May 2021",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey[600],
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: _lectureDetails.length,
-                      itemBuilder: (context, index) {
-                        return SubjectCard(
-                          lectureDetail: _lectureDetails[index],
-                        );
-                      },
                     ),
-                  ),
-                ],
+                  );
+                }).toList(),
               ),
             ),
-          ),
-        ],
+            SizedBox(height: 20),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Today Schedule',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          "Wed 12th May 2021",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: _lectureDetails.length,
+                        itemBuilder: (context, index) {
+                          return SubjectCard(
+                            lectureDetail: _lectureDetails[index],
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
