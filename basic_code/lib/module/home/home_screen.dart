@@ -107,11 +107,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
-      // appBar: AppBar(
-      //   forceMaterialTransparency: true,
-      //   automaticallyImplyLeading: false,
-      //   // title: Text('Lecture Selection'),
-      // ),
       body: SafeArea(
         child: Column(
           children: [
